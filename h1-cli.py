@@ -8,9 +8,6 @@ from tempfile import TemporaryDirectory
 
 import bugzilla
 import click
-from h1.client import HackerOneClient
-from h1.models import Report
-import httpx
 import rich
 from rich.console import Console
 from rich.markdown import Markdown
