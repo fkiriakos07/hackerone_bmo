@@ -68,7 +68,7 @@ def h1_exporter(ctx, h1_report_id, markdown):
 
 
 @h1_cli.command("upload-bmo")
-@click.option("--bugzilla-url", default="https://bugzilla.allizom.org/xmlrpc.cgi", show_default=True,
+@click.option("--bugzilla-url", default="https://bugzilla-dev.allizom.org/xmlrpc.cgi", show_default=True,
               help="Bugzilla instance URL")
 @click.argument("h1-report-id", type=click.INT)
 @click.pass_context
