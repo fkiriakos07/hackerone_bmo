@@ -141,7 +141,7 @@ class HackerOneAttachment:
 
         self.local_path = save_dir_path
 
-        return save_dir_path
+        return attachment_full_path
 
     @classmethod
     def load_from_dict(cls, attachment):
