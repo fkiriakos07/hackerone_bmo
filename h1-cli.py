@@ -18,8 +18,6 @@ from rich.table import Table
 import h1lib
 
 
-
-
 @click.group("h1-cli")
 @click.option("-h1u", "--h1-key-username", help="HackerOne API key name", type=click.STRING, required=True,
               default="scott_f_bmo_exporter")
@@ -85,14 +83,15 @@ def upload_bmo(ctx, h1_report_id, bugzilla_url):
     session = h1lib.HackerOneSession(username=h1_key_username, token=h1_api_key, console=console,
                                      cache=cache)
     report = session.get_report(h1_report_id)
-    # console.print(report.raw_report_dict)
+
     attachments_list = session.get_attachments(report)
 
-    # Create bugzilla report object
-    create_info = report.h1_bug_converter(bzapi)
+    # Create bugzilla report object in memory
+    bugzilla_report_obj = report.create_bmo_obj(bzapi)
 
-    # Create the bug report
-    new_bug = bzapi.createbug(create_info)
+    # Create the bug report on server. This makes the bug on the server
+    new_bug = bzapi.createbug(bugzilla_report_obj)
+
     pprint(f"{h1lib.success_msg} Created a bug with ID: {new_bug.id}\nURL: {new_bug.weburl}")
 
     # Download each attachment and save it to a temp file

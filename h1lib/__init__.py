@@ -261,18 +261,17 @@ class HackerOneReport:
             report
         )
 
-    def h1_bug_converter(self, bzapi):
-        """Consume report data and produce a Bugzilla report"""
-        title_prefix = f"[HackerOne Report]"
+    def create_bmo_obj(self, bzapi):
+        """Build a Bugzilla report object with product, component and groups set"""
         product = "Websites"
         component = "Other"
         groups =["websites-security"]
 
-        create_info = bzapi.build_createbug(product=product, component=component, summary=self.formatted_report_title,
+        bugzilla_report_obj = bzapi.build_createbug(product=product, component=component, summary=self.formatted_report_title,
                                         groups=groups, description=self.formatted_report_body)
-        create_info["type"] = "defect"
+        bugzilla_report_obj["type"] = "defect"
 
-        return create_info
+        return bugzilla_report_obj
 
 
 
